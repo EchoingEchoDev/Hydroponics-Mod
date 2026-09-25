@@ -1,6 +1,8 @@
 {
   "itemGroup.hydroponics": "Hydroponics Tab",
   "block.hydroponics.hydroponic_tower_block": "Hydroponic Tower",
+  "block.hydroponics.hydroponic_planter_block": "Hydroponic Planter",
+
   "item.hydroponics.compost": "Compost",
 
   "hydroponics.configuration.title": "Hydroponics Configs",

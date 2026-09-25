@@ -9,8 +9,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.function.Supplier;
 
 import static net.echoingechodev.hydroponics.Hydroponics.MODID;
-import static net.echoingechodev.hydroponics.blocks.ModBlocks.BLOCKS;
-import static net.echoingechodev.hydroponics.blocks.ModBlocks.HYDROPONIC_TOWER_BLOCK;
+import static net.echoingechodev.hydroponics.blocks.ModBlocks.*;
 
 public class ModBlockEntitieTypes {
 
@@ -26,6 +25,21 @@ public class ModBlockEntitieTypes {
                             // A vararg of blocks that can have this block entity.
                             // This assumes the existence of the referenced blocks as DeferredBlock<Block>s.
                             HYDROPONIC_TOWER_BLOCK.get()
+
+                    )
+                    // Build using null; vanilla does some datafixer shenanigans with the parameter that we don't need.
+                    .build(null)
+    );
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<HydroponicPlanterEntity>> HYDROPONIC_PLANTER_ENTITY_TYPE = BLOCK_ENTITY_TYPES.register(
+            "hydroponic_planter_be",
+            // The block entity type, created using a builder.
+            () -> BlockEntityType.Builder.of(
+                            // The supplier to use for constructing the block entity instances.
+                            HydroponicPlanterEntity::new,
+                            // A vararg of blocks that can have this block entity.
+                            // This assumes the existence of the referenced blocks as DeferredBlock<Block>s.
+                            HYDROPONIC_PLANTER_BLOCK.get()
 
                     )
                     // Build using null; vanilla does some datafixer shenanigans with the parameter that we don't need.

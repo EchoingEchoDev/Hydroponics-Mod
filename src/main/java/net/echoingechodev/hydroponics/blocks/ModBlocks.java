@@ -1,14 +1,9 @@
 package net.echoingechodev.hydroponics.blocks;
 
-import net.echoingechodev.hydroponics.Hydroponics;
-import net.echoingechodev.hydroponics.blocks.blockentities.HydroponicTowerEntity;
 import net.echoingechodev.hydroponics.items.ModItems;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -23,6 +18,9 @@ public class ModBlocks {
 
     public static final DeferredBlock<HydroponicTowerBlock> HYDROPONIC_TOWER_BLOCK = registerBlockWithItem("hydroponic_tower_block",
             () -> new HydroponicTowerBlock(BlockBehaviour.Properties.of().noOcclusion()));
+
+    public static final DeferredBlock<HydroponicPlanterBlock> HYDROPONIC_PLANTER_BLOCK = registerBlockWithItem("hydroponic_planter_block",
+            () -> new HydroponicPlanterBlock(BlockBehaviour.Properties.of().noOcclusion()));
 
 
     private static <T extends Block> DeferredBlock<T> registerBlockWithItem(String name, Supplier<T> block) {
