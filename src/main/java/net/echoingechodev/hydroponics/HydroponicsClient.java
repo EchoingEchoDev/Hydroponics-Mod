@@ -1,4 +1,4 @@
-package net.hydroponics.echoingechodev;
+package net.echoingechodev.hydroponics;
 
 import net.minecraft.client.Minecraft;
 import net.neoforged.api.distmarker.Dist;
