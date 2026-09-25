@@ -1,5 +1,6 @@
 package net.echoingechodev.hydroponics;
 
+import net.echoingechodev.hydroponics.datagen.DataGenerators;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -23,6 +24,9 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import static net.echoingechodev.hydroponics.blocks.ModBlocks.BLOCKS;
+import static net.echoingechodev.hydroponics.blocks.ModBlocks.HYDROPONIC_TOWER_BLOCK;
+import static net.echoingechodev.hydroponics.blocks.blockentities.ModBlockEntitieTypes.BLOCK_ENTITY_TYPES;
+import static net.echoingechodev.hydroponics.items.ModItems.COMPOST;
 import static net.echoingechodev.hydroponics.items.ModItems.ITEMS;
 import static net.minecraft.world.item.Items.WHEAT_SEEDS;
 
@@ -53,9 +57,11 @@ public class Hydroponics {
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("hydroponics_tab", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.hydroponics")) //The language key for the title of your CreativeModeTab
             .withTabsBefore(CreativeModeTabs.COMBAT)
-            .icon(() -> WHEAT_SEEDS.getDefaultInstance())
+            .icon(() -> COMPOST.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
                 //output.accept(EXAMPLE_ITEM.get());// Add the example item to the tab. For your own tabs, this method is preferred over the event
+                output.accept(COMPOST.get());
+
             }).build());
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.
@@ -66,6 +72,7 @@ public class Hydroponics {
 
         // Register the Deferred Register to the mod event bus so blocks get registered
         BLOCKS.register(modEventBus);
+        BLOCK_ENTITY_TYPES.register(modEventBus);
         // Register the Deferred Register to the mod event bus so items get registered
         ITEMS.register(modEventBus);
         // Register the Deferred Register to the mod event bus so tabs get registered

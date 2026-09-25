@@ -1,7 +1,7 @@
 {
-  "itemGroup.hydroponics": "Example Mod Tab",
-  "block.hydroponics.example_block": "Example Block",
-  "item.hydroponics.example_item": "Example Item",
+  "itemGroup.hydroponics": "Hydroponics Tab",
+  "block.hydroponics.hydroponic_tower_block": "Hydroponic Tower",
+  "item.hydroponics.compost": "Compost",
 
   "hydroponics.configuration.title": "Hydroponics Configs",
   "hydroponics.configuration.section.hydroponics.common.toml": "Hydroponics Configs",

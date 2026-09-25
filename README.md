@@ -9,6 +9,7 @@ Planned Features:
 * Hydroponic Towers  
 * Hydroponic Planters
 * Nutrient Fluid for the Hydroponic Towers
+  * Compost and Saltpeter
 * Mod integration for the recipes:
   * Create
   * Mekanism
