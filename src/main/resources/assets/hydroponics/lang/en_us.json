@@ -1,0 +1,13 @@
+{
+  "itemGroup.hydroponics": "Example Mod Tab",
+  "block.hydroponics.example_block": "Example Block",
+  "item.hydroponics.example_item": "Example Item",
+
+  "hydroponics.configuration.title": "Hydroponics Configs",
+  "hydroponics.configuration.section.hydroponics.common.toml": "Hydroponics Configs",
+  "hydroponics.configuration.section.hydroponics.common.toml.title": "Hydroponics Configs",
+  "hydroponics.configuration.items": "Item List",
+  "hydroponics.configuration.logDirtBlock": "Log Dirt Block",
+  "hydroponics.configuration.magicNumberIntroduction": "Magic Number Text",
+  "hydroponics.configuration.magicNumber": "Magic Number"
+}
