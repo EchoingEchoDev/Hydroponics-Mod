@@ -1,6 +1,7 @@
 package net.echoingechodev.hydroponics;
 
 import net.echoingechodev.hydroponics.datagen.DataGenerators;
+import net.neoforged.fml.common.EventBusSubscriber;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -25,8 +26,9 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 import static net.echoingechodev.hydroponics.blocks.ModBlocks.*;
 import static net.echoingechodev.hydroponics.blocks.blockentities.ModBlockEntitieTypes.BLOCK_ENTITY_TYPES;
-import static net.echoingechodev.hydroponics.items.ModItems.COMPOST;
-import static net.echoingechodev.hydroponics.items.ModItems.ITEMS;
+import static net.echoingechodev.hydroponics.fluids.ModFluids.FLUIDS;
+import static net.echoingechodev.hydroponics.fluids.ModFluids.FLUID_TYPES;
+import static net.echoingechodev.hydroponics.items.ModItems.*;
 import static net.minecraft.world.item.Items.WHEAT_SEEDS;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
@@ -60,6 +62,7 @@ public class Hydroponics {
             .displayItems((parameters, output) -> {
                 //output.accept(EXAMPLE_ITEM.get());// Add the example item to the tab. For your own tabs, this method is preferred over the event
                 output.accept(COMPOST.get());
+                output.accept(NUTRIENT_WATER_BUCKET.get());
                 output.accept(HYDROPONIC_TOWER_BLOCK.get());
                 output.accept(HYDROPONIC_PLANTER_BLOCK.get());
             }).build());
@@ -75,6 +78,9 @@ public class Hydroponics {
         BLOCK_ENTITY_TYPES.register(modEventBus);
         // Register the Deferred Register to the mod event bus so items get registered
         ITEMS.register(modEventBus);
+
+        FLUIDS.register(modEventBus);
+        FLUID_TYPES.register(modEventBus);
         // Register the Deferred Register to the mod event bus so tabs get registered
         CREATIVE_MODE_TABS.register(modEventBus);
 

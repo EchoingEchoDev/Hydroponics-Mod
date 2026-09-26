@@ -1,0 +1,12 @@
+{
+  "textures": {
+	"particle": "neoforge:block/nutrient_water_still",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": 65280
+      }
+    ]
+  },
+  "render_type": "minecraft:cutout"
+}

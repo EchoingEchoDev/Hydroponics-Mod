@@ -4,6 +4,7 @@
   "block.hydroponics.hydroponic_planter_block": "Hydroponic Planter",
 
   "item.hydroponics.compost": "Compost",
+  "item.hydroponics.nutrient_water_bucket": "Nutrient Water Bucket",
 
   "hydroponics.configuration.title": "Hydroponics Configs",
   "hydroponics.configuration.section.hydroponics.common.toml": "Hydroponics Configs",

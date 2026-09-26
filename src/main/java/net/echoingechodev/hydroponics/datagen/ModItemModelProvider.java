@@ -14,5 +14,6 @@ public class ModItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
         basicItem(ModItems.COMPOST.get());
+        basicItem(ModItems.NUTRIENT_WATER_BUCKET.get());
     }
 }

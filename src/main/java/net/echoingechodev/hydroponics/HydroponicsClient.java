@@ -1,6 +1,9 @@
 package net.echoingechodev.hydroponics;
 
+import net.echoingechodev.hydroponics.fluids.ModFluids;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
@@ -27,5 +30,8 @@ public class HydroponicsClient {
         // Some client setup code
         Hydroponics.LOGGER.info("HELLO FROM CLIENT SETUP");
         Hydroponics.LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.NUTRIENT_WATER.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(ModFluids.NUTRIENT_WATER_FLOWING.get(), RenderType.translucent());
     }
 }
