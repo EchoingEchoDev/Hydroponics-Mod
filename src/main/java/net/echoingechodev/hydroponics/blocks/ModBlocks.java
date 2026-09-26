@@ -5,6 +5,7 @@ import net.echoingechodev.hydroponics.items.ModItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Fluids;
@@ -21,6 +22,9 @@ import static net.echoingechodev.hydroponics.fluids.ModFluids.NUTRIENT_WATER;
 public class ModBlocks {
 
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MODID);
+
+    public static final DeferredBlock<Block> SALTPETER_ORE = registerBlockWithItem("saltpeter_ore",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_ORE)));
 
     public static final DeferredBlock<HydroponicTowerBlock> HYDROPONIC_TOWER_BLOCK = registerBlockWithItem("hydroponic_tower_block",
             () -> new HydroponicTowerBlock(BlockBehaviour.Properties.of().noOcclusion()));

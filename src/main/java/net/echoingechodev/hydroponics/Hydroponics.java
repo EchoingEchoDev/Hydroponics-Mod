@@ -62,6 +62,8 @@ public class Hydroponics {
             .displayItems((parameters, output) -> {
                 //output.accept(EXAMPLE_ITEM.get());// Add the example item to the tab. For your own tabs, this method is preferred over the event
                 output.accept(COMPOST.get());
+                output.accept(SALTPETER.get());
+                output.accept(SALTPETER_ORE.get());
                 output.accept(NUTRIENT_WATER_BUCKET.get());
                 output.accept(HYDROPONIC_TOWER_BLOCK.get());
                 output.accept(HYDROPONIC_PLANTER_BLOCK.get());

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "hydroponics:block/saltpeter_ore"
+    }
+  }
+}

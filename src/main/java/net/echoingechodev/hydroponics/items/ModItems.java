@@ -18,6 +18,7 @@ public class ModItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MODID);
 
     public static final DeferredItem<Item> COMPOST = ITEMS.registerSimpleItem("compost", new Item.Properties());
+    public static final DeferredItem<Item> SALTPETER = ITEMS.registerSimpleItem("saltpeter", new Item.Properties());
     public static final DeferredItem<Item> NUTRIENT_WATER_BUCKET = ITEMS.register("nutrient_water_bucket",
             () -> new BucketItem(NUTRIENT_WATER.get(), new Item.Properties().craftRemainder(BUCKET).stacksTo(1)));
 

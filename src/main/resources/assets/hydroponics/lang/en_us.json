@@ -2,8 +2,10 @@
   "itemGroup.hydroponics": "Hydroponics Tab",
   "block.hydroponics.hydroponic_tower_block": "Hydroponic Tower",
   "block.hydroponics.hydroponic_planter_block": "Hydroponic Planter",
+  "block.hydroponics.saltpeter_ore": "Saltpeter Ore",
 
   "item.hydroponics.compost": "Compost",
+  "item.hydroponics.saltpeter": "Saltpeter",
   "item.hydroponics.nutrient_water_bucket": "Nutrient Water Bucket",
 
   "hydroponics.configuration.title": "Hydroponics Configs",
