@@ -23,8 +23,7 @@ import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-import static net.echoingechodev.hydroponics.blocks.ModBlocks.BLOCKS;
-import static net.echoingechodev.hydroponics.blocks.ModBlocks.HYDROPONIC_TOWER_BLOCK;
+import static net.echoingechodev.hydroponics.blocks.ModBlocks.*;
 import static net.echoingechodev.hydroponics.blocks.blockentities.ModBlockEntitieTypes.BLOCK_ENTITY_TYPES;
 import static net.echoingechodev.hydroponics.items.ModItems.COMPOST;
 import static net.echoingechodev.hydroponics.items.ModItems.ITEMS;
@@ -61,7 +60,8 @@ public class Hydroponics {
             .displayItems((parameters, output) -> {
                 //output.accept(EXAMPLE_ITEM.get());// Add the example item to the tab. For your own tabs, this method is preferred over the event
                 output.accept(COMPOST.get());
-
+                output.accept(HYDROPONIC_TOWER_BLOCK.get());
+                output.accept(HYDROPONIC_PLANTER_BLOCK.get());
             }).build());
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.

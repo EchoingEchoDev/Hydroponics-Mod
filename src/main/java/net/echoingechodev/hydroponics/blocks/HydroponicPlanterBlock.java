@@ -2,19 +2,14 @@ package net.echoingechodev.hydroponics.blocks;
 
 import com.mojang.serialization.MapCodec;
 import net.echoingechodev.hydroponics.blocks.blockentities.HydroponicPlanterEntity;
-import net.echoingechodev.hydroponics.blocks.blockentities.HydroponicTowerEntity;
 import net.echoingechodev.hydroponics.blocks.blockentities.ModBlockEntitieTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.EntityBlock;
-import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -48,15 +43,21 @@ public class HydroponicPlanterBlock extends BaseEntityBlock implements EntityBlo
         return RenderShape.MODEL;
     }
 
-    @Override
+
+    /*@Override
     protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         super.randomTick(state, level, pos, random);
-        // TODO: Grow like regular Farmland
-    }
+
+    }*/
 
     @Override
     public TriState canSustainPlant(BlockState state, BlockGetter level, BlockPos soilPosition, Direction facing, BlockState plant) {
         return TriState.TRUE;
+    }
+
+    @Override
+    public boolean isFertile(BlockState state, BlockGetter level, BlockPos pos) {
+        return true;
     }
 
     /* BLOCK ENTITY FUNCTIONS */
@@ -68,13 +69,13 @@ public class HydroponicPlanterBlock extends BaseEntityBlock implements EntityBlo
 
     @Override
     public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
-        return this.createTickerHelper(blockEntityType, ModBlockEntitieTypes.HYDROPONIC_PLANTER_ENTITY_TYPE.get(), HydroponicPlanterEntity::tick);
-        // ???
+        return createTickerHelper(blockEntityType, ModBlockEntitieTypes.HYDROPONIC_PLANTER_ENTITY_TYPE.get(), HydroponicPlanterEntity::tick, true);
     }
 
-    public static <E extends BlockEntity, A extends BlockEntity> @Nullable BlockEntityTicker<A> createTickerHelper(
-            BlockEntityType<A> type, BlockEntityType<E> checkedType, BlockEntityTicker<? super E> ticker) {
-        return checkedType == type ? (BlockEntityTicker<A>) ticker : null;
+    public static <E extends BlockEntity, T extends BlockEntity> @Nullable BlockEntityTicker<T> createTickerHelper(
+            BlockEntityType<T> type, BlockEntityType<E> checkedType, BlockEntityTicker<? super E> ticker, boolean forcethisone
+    ) {
+        return checkedType == type ? (BlockEntityTicker<T>) ticker : null;
     }
 
     @Override

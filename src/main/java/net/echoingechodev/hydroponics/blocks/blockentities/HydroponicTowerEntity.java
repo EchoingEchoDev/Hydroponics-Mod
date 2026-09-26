@@ -64,7 +64,9 @@ public class HydroponicTowerEntity extends BlockEntity {
             int toTransferAvailable = Math.max(max_transfer, blockEntity.tank.getFluidAmount());
             int toTransferBelow = 0;
             int toTransferSides = 0;
+            // TODO: Move to block updates
             boolean towerBelowFlag = level.getBlockState(pos.below()).is(ModBlocks.HYDROPONIC_TOWER_BLOCK);
+            // TODO: Move to block updates
             int connectedTargets = countTransferTargetOnSides(level, pos);
 
             // Calc how much to transfer to where
