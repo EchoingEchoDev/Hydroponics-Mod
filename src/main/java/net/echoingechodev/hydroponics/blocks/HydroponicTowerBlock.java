@@ -12,6 +12,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
@@ -30,6 +31,8 @@ import net.neoforged.neoforge.fluids.FluidUtil;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.Nullable;
 
+import static net.echoingechodev.hydroponics.blocks.ModBlocks.HYDROPONIC_PLANTER_BLOCK;
+import static net.echoingechodev.hydroponics.blocks.ModBlocks.HYDROPONIC_TOWER_BLOCK;
 import static net.echoingechodev.hydroponics.blocks.blockentities.ModBlockEntitieTypes.BLOCK_ENTITY_TYPES;
 
 
@@ -109,6 +112,17 @@ public class HydroponicTowerBlock extends BaseEntityBlock implements EntityBlock
     private static boolean isEmptyFluidContainer(ItemStack itemStack) {
         return FluidUtil.getFluidContained(itemStack).isEmpty();
     }
+
+    @Override
+    public void onNeighborChange(BlockState state, LevelReader level, BlockPos pos, BlockPos neighbor) {
+        if (!level.isClientSide() && level.getBlockEntity(pos) instanceof HydroponicTowerEntity entity) {
+            if (level.getBlockState(neighbor).is(HYDROPONIC_TOWER_BLOCK) || level.getBlockState(neighbor).is(HYDROPONIC_PLANTER_BLOCK)) {
+                entity.updateConnectedSide((Level) level, pos);
+                entity.updateConnectedBelow((Level) level, pos);
+            }
+        }
+    }
+
 
     @Override
     public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {

@@ -1,5 +1,7 @@
 package net.echoingechodev.hydroponics.blocks.blockentities;
 
+import net.echoingechodev.hydroponics.fluids.ModFluids;
+import net.echoingechodev.hydroponics.util.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -27,6 +29,7 @@ public class HydroponicPlanterEntity extends BlockEntity {
     //private static final int base_comsume_amount = 10;
     private static final int water_consume_amount = 20;
     private static final int nutrient_fluid_consume_amount = 2;
+    private static final int other_fluid_consume_amount = 2;
     private static final int ticks_per_action = 3;
     private int tick_count = 0;
 
@@ -41,8 +44,10 @@ public class HydroponicPlanterEntity extends BlockEntity {
 
         @Override
         public boolean isFluidValid(FluidStack stack) {
-            // TODO: Change to only accept Water and Nutrient Water
-            return true;
+            if (stack.is(ModTags.Fluids.HYDROPONIC_GROWTH_FLUID)) {
+                return true;
+            }
+            return false;
         }
     };
 
@@ -63,16 +68,27 @@ public class HydroponicPlanterEntity extends BlockEntity {
                     if (tank.getFluidAmount() / water_consume_amount > 0) {
                         var crop = getCropAt(level, pos.above());
                         if (crop != null) {
-                            crop.randomTick((ServerLevel) level, pos.above(), RandomSource.create());
-                            tank.drain(water_consume_amount, IFluidHandler.FluidAction.EXECUTE);
+                            if (tryTickCrop(level, pos.above(), crop)) {
+                                tank.drain(water_consume_amount, IFluidHandler.FluidAction.EXECUTE);
+                            }
                         }
                     }
-                } else if (tank.getFluid().is(Fluids.LAVA)) {   // NUTRIENT WATER TODO: Replace with Nutrient Water
+                } else if (tank.getFluid().is(ModFluids.NUTRIENT_WATER.get())) {   // NUTRIENT WATER
                     if (tank.getFluidAmount() / nutrient_fluid_consume_amount > 0) {
                         var crop = getCropAt(level, pos.above());
                         if (crop != null) {
-                            crop.randomTick((ServerLevel) level, pos.above(), RandomSource.create());
-                            tank.drain(nutrient_fluid_consume_amount, IFluidHandler.FluidAction.EXECUTE);
+                            if (tryTickCrop(level, pos.above(), crop)) {
+                                tank.drain(nutrient_fluid_consume_amount, IFluidHandler.FluidAction.EXECUTE);
+                            }
+                        }
+                    }
+                } else if (tank.getFluid().is(ModTags.Fluids.HYDROPONIC_GROWTH_FLUID)) {  // OTHER FLUIDS TAGGED "HYDROPONIC_GROWTH_FLUID"
+                    if (tank.getFluidAmount() / other_fluid_consume_amount > 0) {
+                        var crop = getCropAt(level, pos.above());
+                        if (crop != null) {
+                            if (tryTickCrop(level, pos.above(), crop)) {
+                                tank.drain(other_fluid_consume_amount, IFluidHandler.FluidAction.EXECUTE);
+                            }
                         }
                     }
                 }
@@ -81,6 +97,18 @@ public class HydroponicPlanterEntity extends BlockEntity {
                 blockEntity.tick_count++;
             }
         }
+    }
+
+    public static boolean tryTickCrop(Level level, BlockPos pos, BlockState crop) {
+        if (crop.getBlock() instanceof CropBlock target) {
+            if (!target.isMaxAge(crop)) {
+                crop.randomTick((ServerLevel) level, pos, RandomSource.create());
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
     }
 
     public static BlockState getCropAt(Level level, BlockPos pos) {

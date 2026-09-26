@@ -1,6 +1,7 @@
 package net.echoingechodev.hydroponics.blocks.blockentities;
 
 import net.echoingechodev.hydroponics.blocks.ModBlocks;
+import net.echoingechodev.hydroponics.util.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -15,7 +16,9 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.WaterFluid;
+import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.fluids.FluidInteractionRegistry;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidUtil;
@@ -25,8 +28,12 @@ import net.neoforged.neoforge.fluids.capability.templates.FluidHandlerItemStack;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import org.jetbrains.annotations.Nullable;
 
+import javax.swing.text.html.HTMLDocument;
 import java.util.Set;
 import java.util.function.Predicate;
+
+import static net.echoingechodev.hydroponics.blocks.ModBlocks.HYDROPONIC_TOWER_BLOCK;
+import static net.echoingechodev.hydroponics.blocks.blockentities.ModBlockEntitieTypes.HYDROPONIC_TOWER_ENTITY_TYPE;
 
 
 public class HydroponicTowerEntity extends BlockEntity {
@@ -45,59 +52,76 @@ public class HydroponicTowerEntity extends BlockEntity {
 
         @Override
         public boolean isFluidValid(FluidStack stack) {
-            // TODO: Change to only accept Water and Nutrient Water
-            return true;
+            if (stack.is(ModTags.Fluids.HYDROPONIC_GROWTH_FLUID)) {
+                return true;
+            }
+            return false;
         }
     };
+    private int connected_sides = 0;
+    private boolean connected_below = false;
+    private static final int ticks_per_action = 4;
+    private int tick_count = 0;
 
     public HydroponicTowerEntity(BlockEntityType<?> type, BlockPos pos, BlockState blockState) {
-        super(ModBlockEntitieTypes.HYDROPONIC_TOWER_ENTITY_TYPE.get(), pos, blockState);
+        super(HYDROPONIC_TOWER_ENTITY_TYPE.get(), pos, blockState);
     }
 
     public HydroponicTowerEntity(BlockPos blockPos, BlockState blockState) {
-        super(ModBlockEntitieTypes.HYDROPONIC_TOWER_ENTITY_TYPE.get(), blockPos, blockState);
+        super(HYDROPONIC_TOWER_ENTITY_TYPE.get(), blockPos, blockState);
     }
 
+    public IFluidHandler getFluidHandler(@Nullable Direction side) {
+        if (side != Direction.UP) {
+            return null;
+        } else {
+            return this.tank;
+        }
+    }
 
     public static void tick(Level level, BlockPos pos, BlockState state, HydroponicTowerEntity blockEntity) {
         if (!level.isClientSide() && !blockEntity.tank.isEmpty()) {
-            int toTransferAvailable = Math.max(max_transfer, blockEntity.tank.getFluidAmount());
-            int toTransferBelow = 0;
-            int toTransferSides = 0;
-            // TODO: Move to block updates
-            boolean towerBelowFlag = level.getBlockState(pos.below()).is(ModBlocks.HYDROPONIC_TOWER_BLOCK);
-            // TODO: Move to block updates
-            int connectedTargets = countTransferTargetOnSides(level, pos);
+            if (blockEntity.tick_count % ticks_per_action == 0) {
+                int toTransferAvailable = Math.max(max_transfer, blockEntity.tank.getFluidAmount());
+                int toTransferBelow = 0;
+                int toTransferSides = 0;
+                blockEntity.updateConnectedSide(level, pos);
+                blockEntity.updateConnectedBelow(level, pos);
 
-            // Calc how much to transfer to where
-            if (connectedTargets == 0) {
-                toTransferBelow = toTransferAvailable;
-            } else {
-                if (towerBelowFlag) {
-                    toTransferBelow = toTransferAvailable / 2;
-                    toTransferAvailable = toTransferAvailable / 2;
+                // Calc how much to transfer to where
+                if (blockEntity.connected_sides == 0) {
+                    toTransferBelow = toTransferAvailable;
+                } else {
+                    if (blockEntity.connected_below) {
+                        toTransferBelow = toTransferAvailable / 2;
+                        toTransferAvailable = toTransferAvailable / 2;
+                    }
+                    toTransferSides = toTransferAvailable / blockEntity.connected_sides;
                 }
-                toTransferSides = toTransferAvailable / connectedTargets;
+
+                // Do the actual transferring
+                tryTransferFluid(level, pos, blockEntity, pos.north(), toTransferSides);
+                tryTransferFluid(level, pos, blockEntity, pos.east(), toTransferSides);
+                tryTransferFluid(level, pos, blockEntity, pos.west(), toTransferSides);
+                tryTransferFluid(level, pos, blockEntity, pos.south(), toTransferSides);
+                if (blockEntity.connected_below) {
+                    tryTransferFluid(level, pos, blockEntity, pos.below(), toTransferBelow);
+                }
+
+                blockEntity.tick_count = 0;
+            } else {
+                blockEntity.tick_count++;
             }
 
-            // Do the actual transferring
-            tryTransferFluid(level, pos, blockEntity, pos.north(), toTransferSides);
-            tryTransferFluid(level, pos, blockEntity, pos.east(), toTransferSides);
-            tryTransferFluid(level, pos, blockEntity, pos.west(), toTransferSides);
-            tryTransferFluid(level, pos, blockEntity, pos.south(), toTransferSides);
-            if (towerBelowFlag) {
-                tryTransferFluid(level, pos, blockEntity, pos.below(), toTransferBelow);
-            }
         }
     }
 
     private static void tryTransferFluid(Level level, BlockPos origin, HydroponicTowerEntity originEntity, BlockPos target, int amount) {
-        if (level.getBlockState(target).is(ModBlocks.HYDROPONIC_TOWER_BLOCK)) {
-            if (level.getBlockEntity(target) instanceof HydroponicTowerEntity targetEntity) {
+        if (level.getBlockState(target).is(ModTags.Blocks.HYDROPONIC_TOWER_BOTTOM_ATTACHMENTS)) {
+            if (level.getBlockEntity(target) instanceof HydroponicPlanterEntity targetEntity) {
                 FluidUtil.tryFluidTransfer(targetEntity.getTank(), originEntity.getTank(), amount, true);
             }
-        }
-        if (level.getBlockState(target).is(ModBlocks.HYDROPONIC_PLANTER_BLOCK)) {
+        } else if (level.getBlockState(target).is(ModTags.Blocks.HYDROPONIC_TOWER_SIDE_ATTACHMENTS)) {
             if (level.getBlockEntity(target) instanceof HydroponicPlanterEntity targetEntity) {
                 FluidUtil.tryFluidTransfer(targetEntity.getTank(), originEntity.getTank(), amount, true);
             }
@@ -106,17 +130,16 @@ public class HydroponicTowerEntity extends BlockEntity {
 
     private static int countTransferTargetOnSides(Level level, BlockPos pos) {
         int result = 0;
-        // TODO: Also probably just use a tag
-        if (level.getBlockState(pos.north()).is(ModBlocks.HYDROPONIC_TOWER_BLOCK) || level.getBlockState(pos.north()).is(ModBlocks.HYDROPONIC_PLANTER_BLOCK)) {
+        if (level.getBlockState(pos.north()).is(ModTags.Blocks.HYDROPONIC_TOWER_SIDE_ATTACHMENTS)) {
             result++;
         }
-        if (level.getBlockState(pos.east()).is(ModBlocks.HYDROPONIC_TOWER_BLOCK) || level.getBlockState(pos.east()).is(ModBlocks.HYDROPONIC_PLANTER_BLOCK)) {
+        if (level.getBlockState(pos.east()).is(ModTags.Blocks.HYDROPONIC_TOWER_SIDE_ATTACHMENTS)) {
             result++;
         }
-        if (level.getBlockState(pos.west()).is(ModBlocks.HYDROPONIC_TOWER_BLOCK) || level.getBlockState(pos.west()).is(ModBlocks.HYDROPONIC_PLANTER_BLOCK)) {
+        if (level.getBlockState(pos.west()).is(ModTags.Blocks.HYDROPONIC_TOWER_SIDE_ATTACHMENTS)) {
             result++;
         }
-        if (level.getBlockState(pos.south()).is(ModBlocks.HYDROPONIC_TOWER_BLOCK) || level.getBlockState(pos.south()).is(ModBlocks.HYDROPONIC_PLANTER_BLOCK)) {
+        if (level.getBlockState(pos.south()).is(ModTags.Blocks.HYDROPONIC_TOWER_SIDE_ATTACHMENTS)) {
             result++;
         }
         return result;
@@ -141,6 +164,14 @@ public class HydroponicTowerEntity extends BlockEntity {
 
     public int getCapacity() {
         return fill_capacity;
+    }
+
+    public void updateConnectedSide(Level level, BlockPos pos) {
+        connected_sides = countTransferTargetOnSides(level, pos);
+    }
+
+    public void updateConnectedBelow(Level level, BlockPos pos) {
+        connected_below = level.getBlockState(pos.below()).is(ModTags.Blocks.HYDROPONIC_TOWER_BOTTOM_ATTACHMENTS);
     }
 
     /* SAVING & SNYC */
