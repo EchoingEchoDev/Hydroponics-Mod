@@ -78,9 +78,33 @@ A mod aiming to introduce a hydroponic planting system to Minecraft.
     side="BOTH"
 
 # Here's another dependency
-[[dependencies.${mod_id}]]
-    modId="minecraft"
-    type="required"
+[[dependencies.jade]]
+    modId="jade"
+    type="optional"
+    # This version range declares a minimum of the current minecraft version up to but not including the next major version
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.create]]
+    modId="create"
+    type="optional"
+    # This version range declares a minimum of the current minecraft version up to but not including the next major version
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.mekanism]]
+    modId="mekanism"
+    type="optional"
+    # This version range declares a minimum of the current minecraft version up to but not including the next major version
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.compost]]
+    modId="compost"
+    type="optional"
     # This version range declares a minimum of the current minecraft version up to but not including the next major version
     versionRange="${minecraft_version_range}"
     ordering="NONE"

@@ -2,6 +2,7 @@ package net.echoingechodev.hydroponics;
 
 import net.createmod.ponder.foundation.PonderIndex;
 import net.echoingechodev.hydroponics.fluids.ModFluids;
+import net.echoingechodev.hydroponics.jade.HydroponicsJadePlugin;
 import net.echoingechodev.hydroponics.ponders.ModPonders;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -15,8 +16,7 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 
-import static net.echoingechodev.hydroponics.Hydroponics.isCreateLoaded;
-import static net.echoingechodev.hydroponics.Hydroponics.isPonderLoaded;
+import static net.echoingechodev.hydroponics.Hydroponics.*;
 
 // This class will not load on dedicated servers. Accessing client side code from here is safe.
 @Mod(value = Hydroponics.MODID, dist = Dist.CLIENT)
@@ -41,6 +41,9 @@ public class HydroponicsClient {
 
         if (isPonderLoaded || isCreateLoaded) {
             PonderIndex.addPlugin(new ModPonders());
+        }
+        if (isJadeLoaded) {
+
         }
     }
 }

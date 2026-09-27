@@ -43,6 +43,7 @@ public class Hydroponics {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public static boolean isPonderLoaded = false;
+    public static boolean isJadeLoaded = false;
     public static boolean isCreateLoaded = false;
     public static boolean isMekanismLoaded = false;
 
@@ -93,6 +94,7 @@ public class Hydroponics {
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
 
         isPonderLoaded = ModList.get().isLoaded("ponder");
+        isJadeLoaded = ModList.get().isLoaded("jade");
         isCreateLoaded = ModList.get().isLoaded("create");
         isMekanismLoaded = ModList.get().isLoaded("mekanism");
     }

@@ -5,6 +5,8 @@
   "block.hydroponics.saltpeter_ore": "Saltpeter Ore",
   "block.hydroponics.nether_saltpeter_ore": "Netherrack Saltpeter Ore",
 
+  "fluid_type.hydroponics.nutrient_water_fluid_type": "Nutrient Water",
+
   "item.hydroponics.compost": "Compost",
   "item.hydroponics.saltpeter": "Saltpeter",
   "item.hydroponics.nutrient_water_bucket": "Nutrient Water Bucket",
@@ -26,5 +28,7 @@
   "hydroponics.ponder.setup_hydroponic_tower.text_2": "Any compatible fluid added to the top block will travel down to the lowest block",
   "hydroponics.ponder.setup_hydroponic_tower.text_3": "This is a Hydroponic Planter. As liquid flows through the Tower it will distribute some to these Planters",
   "hydroponics.ponder.setup_hydroponic_tower.text_4": "Planters will then use fluid to grow crops",
-  "hydroponics.ponder.setup_hydroponic_tower.text_5": "Compatible fluids can be pumped in through the top of the Tower"
+  "hydroponics.ponder.setup_hydroponic_tower.text_5": "Compatible fluids can be pumped in through the top of the Tower",
+
+  "config.jade.plugin_hydroponics.hydroponic_tower_entity": "Hydroponic Tower"
 }
