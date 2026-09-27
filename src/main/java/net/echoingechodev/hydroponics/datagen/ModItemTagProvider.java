@@ -1,10 +1,13 @@
 package net.echoingechodev.hydroponics.datagen;
 
 import net.echoingechodev.hydroponics.Hydroponics;
+import net.echoingechodev.hydroponics.blocks.ModBlocks;
+import net.echoingechodev.hydroponics.items.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.data.tags.TagsProvider;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
@@ -21,6 +24,11 @@ public class ModItemTagProvider extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
+        tag(Tags.Items.BUCKETS)
+                .add(ModItems.NUTRIENT_WATER_BUCKET.get());
+
+        tag(Tags.Items.DUSTS)
+                .add(ModItems.SALTPETER.get());
 
     }
 }

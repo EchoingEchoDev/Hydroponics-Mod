@@ -1,6 +1,7 @@
 package net.echoingechodev.hydroponics.blocks.blockentities;
 
 import net.echoingechodev.hydroponics.Config;
+import net.echoingechodev.hydroponics.Hydroponics;
 import net.echoingechodev.hydroponics.blocks.ModBlocks;
 import net.echoingechodev.hydroponics.util.ModTags;
 import net.minecraft.core.BlockPos;
@@ -39,9 +40,9 @@ import static net.echoingechodev.hydroponics.blocks.blockentities.ModBlockEntiti
 
 public class HydroponicTowerEntity extends BlockEntity {
 
-    private static final int fill_capacity = Config.HYDROPONIC_TOWER_FILLCAPACITY.getAsInt();
-    private static final int max_transfer = Config.HYDROPONIC_TOWER_TRANSFERRATE.getAsInt();
-    private static final int ticks_per_action = Config.HYDROPONIC_TOWER_TICKRATE.getAsInt();
+    private static int fill_capacity = Config.HYDROPONIC_TOWER_FILLCAPACITY.get();
+    private static int max_transfer = Config.HYDROPONIC_TOWER_TRANSFERRATE.get();
+    private static int ticks_per_action = Config.HYDROPONIC_TOWER_TICKRATE.get();
 
     private FluidTank tank = new FluidTank(fill_capacity) {
         @Override
@@ -100,6 +101,8 @@ public class HydroponicTowerEntity extends BlockEntity {
                     toTransferSides = toTransferAvailable / blockEntity.connected_sides;
                 }
 
+                //Hydroponics.LOGGER.info("[HY_TOW_INFO] | SIDES: " + blockEntity.connected_sides + " , BOTTOM: " + blockEntity.connected_below);
+
                 // Do the actual transferring
                 tryTransferFluid(level, pos, blockEntity, pos.north(), toTransferSides);
                 tryTransferFluid(level, pos, blockEntity, pos.east(), toTransferSides);
@@ -119,12 +122,16 @@ public class HydroponicTowerEntity extends BlockEntity {
 
     private static void tryTransferFluid(Level level, BlockPos origin, HydroponicTowerEntity originEntity, BlockPos target, int amount) {
         if (level.getBlockState(target).is(ModTags.Blocks.HYDROPONIC_TOWER_BOTTOM_ATTACHMENTS)) {
-            if (level.getBlockEntity(target) instanceof HydroponicPlanterEntity targetEntity) {
-                FluidUtil.tryFluidTransfer(targetEntity.getTank(), originEntity.getTank(), amount, true);
+            if (level.getBlockEntity(target) instanceof HydroponicTowerEntity targetEntity) {
+                if (FluidUtil.tryFluidTransfer(targetEntity.getTank(), originEntity.getTank(), amount, false) != null) {
+                    FluidUtil.tryFluidTransfer(targetEntity.getTank(), originEntity.getTank(), amount, true);
+                }
             }
         } else if (level.getBlockState(target).is(ModTags.Blocks.HYDROPONIC_TOWER_SIDE_ATTACHMENTS)) {
             if (level.getBlockEntity(target) instanceof HydroponicPlanterEntity targetEntity) {
-                FluidUtil.tryFluidTransfer(targetEntity.getTank(), originEntity.getTank(), amount, true);
+                if (FluidUtil.tryFluidTransfer(targetEntity.getTank(), originEntity.getTank(), amount, false) != null) {
+                    FluidUtil.tryFluidTransfer(targetEntity.getTank(), originEntity.getTank(), amount, true);
+                }
             }
         }
     }
@@ -176,6 +183,12 @@ public class HydroponicTowerEntity extends BlockEntity {
     }
 
     /* SAVING & SNYC */
+
+    public static void updateFromConfig() {
+        fill_capacity = Config.HYDROPONIC_TOWER_FILLCAPACITY.get();
+        max_transfer = Config.HYDROPONIC_TOWER_TRANSFERRATE.get();
+        ticks_per_action = Config.HYDROPONIC_TOWER_TICKRATE.get();
+    }
 
     @Override
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {

@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:water_bucket"
+    },
+    {
+      "item": "minecraft:bucket"
+    },
+    {
+      "item": "minecraft:bone_meal"
+    },
+    {
+      "item": "minecraft:bone_meal"
+    },
+    {
+      "item": "hydroponics:compost"
+    },
+    {
+      "item": "hydroponics:saltpeter"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "hydroponics:nutrient_water_bucket"
+  }
+}

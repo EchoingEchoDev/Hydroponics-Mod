@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "G": {
+      "item": "minecraft:copper_grate"
+    },
+    "I": {
+      "item": "minecraft:copper_ingot"
+    }
+  },
+  "pattern": [
+    "IGI",
+    "III"
+  ],
+  "result": {
+    "count": 1,
+    "id": "hydroponics:hydroponic_planter_block"
+  }
+}

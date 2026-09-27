@@ -1,5 +1,7 @@
 package net.echoingechodev.hydroponics;
 
+import net.echoingechodev.hydroponics.blocks.blockentities.HydroponicPlanterEntity;
+import net.echoingechodev.hydroponics.blocks.blockentities.HydroponicTowerEntity;
 import net.echoingechodev.hydroponics.datagen.DataGenerators;
 import net.neoforged.fml.common.EventBusSubscriber;
 import org.slf4j.Logger;
@@ -38,21 +40,8 @@ public class Hydroponics {
     public static final String MODID = "hydroponics";
     // Directly reference a slf4j logger
     public static final Logger LOGGER = LogUtils.getLogger();
-    // Create a Deferred Register to hold Blocks which will all be registered under the "hydroponics" namespace
-    //public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MODID);
-    // Create a Deferred Register to hold Items which will all be registered under the "hydroponics" namespace
-    //ublic static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MODID);
-    // Create a Deferred Register to hold CreativeModeTabs which will all be registered under the "hydroponics" namespace
+
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
-
-    // Creates a new Block with the id "hydroponics:example_block", combining the namespace and path
-    //public static final DeferredBlock<Block> EXAMPLE_BLOCK = BLOCKS.registerSimpleBlock("example_block", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    // Creates a new BlockItem with the id "hydroponics:example_block", combining the namespace and path
-    //public static final DeferredItem<BlockItem> EXAMPLE_BLOCK_ITEM = ITEMS.registerSimpleBlockItem("example_block", EXAMPLE_BLOCK);
-
-    // Creates a new food item with the id "hydroponics:example_id", nutrition 1 and saturation 2
-    //public static final DeferredItem<Item> EXAMPLE_ITEM = ITEMS.registerSimpleItem("example_item", new Item.Properties().food(new FoodProperties.Builder()
-    //        .alwaysEdible().nutrition(1).saturationModifier(2f).build()));
 
     // Creates a creative tab with the id "hydroponics:example_tab" for the example item, that is placed after the combat tab
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("hydroponics_tab", () -> CreativeModeTab.builder()
@@ -102,7 +91,10 @@ public class Hydroponics {
         // Some common setup code
         LOGGER.info("HELLO FROM COMMON SETUP");
 
-
+        if (Config.SPEC.isLoaded()) {
+            HydroponicPlanterEntity.updateFromConfig();
+            HydroponicTowerEntity.updateFromConfig();
+        }
     }
 
     // Add the example block item to the building blocks tab

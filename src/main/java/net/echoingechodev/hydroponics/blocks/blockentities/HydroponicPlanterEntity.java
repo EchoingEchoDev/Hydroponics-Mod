@@ -26,11 +26,11 @@ import org.jetbrains.annotations.Nullable;
 
 public class HydroponicPlanterEntity extends BlockEntity {
 
-    private static final int fill_capacity = Config.HYDROPONIC_PLANTER_FILLCAPACITY.getAsInt();
-    private static final int water_consume_amount = Config.HYDROPONIC_PLANTER_WATER_CONSUME.getAsInt();
-    private static final int nutrient_fluid_consume_amount = Config.HYDROPONIC_PLANTER_NUTRIENT_FLUID_CONSUME.getAsInt();
-    private static final int other_fluid_consume_amount = Config.HYDROPONIC_PLANTER_OTHER_FLUID_CONSUME.getAsInt();
-    private static final int ticks_per_action = Config.HYDROPONIC_PLANTER_TICKRATE.getAsInt();
+    private static int fill_capacity = Config.HYDROPONIC_PLANTER_FILLCAPACITY.get();
+    private static int water_consume_amount = Config.HYDROPONIC_PLANTER_WATER_CONSUME.get();
+    private static int nutrient_fluid_consume_amount = Config.HYDROPONIC_PLANTER_NUTRIENT_FLUID_CONSUME.get();
+    private static int other_fluid_consume_amount = Config.HYDROPONIC_PLANTER_OTHER_FLUID_CONSUME.get();
+    private static int ticks_per_action = Config.HYDROPONIC_PLANTER_TICKRATE.get();
     private int tick_count = 0;
 
     private FluidTank tank = new FluidTank(fill_capacity) {
@@ -141,6 +141,14 @@ public class HydroponicPlanterEntity extends BlockEntity {
     }
 
     /* SAVING & SNYC */
+
+    public static void updateFromConfig() {
+        fill_capacity = Config.HYDROPONIC_PLANTER_FILLCAPACITY.get();
+        water_consume_amount = Config.HYDROPONIC_PLANTER_WATER_CONSUME.get();;
+        nutrient_fluid_consume_amount = Config.HYDROPONIC_PLANTER_NUTRIENT_FLUID_CONSUME.get();;
+        other_fluid_consume_amount = Config.HYDROPONIC_PLANTER_OTHER_FLUID_CONSUME.get();;
+        ticks_per_action = Config.HYDROPONIC_PLANTER_TICKRATE.get();;
+    }
 
     @Override
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
