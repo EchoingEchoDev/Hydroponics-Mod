@@ -15,5 +15,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         simpleBlockWithItem(ModBlocks.SALTPETER_ORE.get(), cubeAll(ModBlocks.SALTPETER_ORE.get()));
+        simpleBlockWithItem(ModBlocks.NETHER_SALTPETER_ORE.get(), cubeAll(ModBlocks.NETHER_SALTPETER_ORE.get()));
     }
 }

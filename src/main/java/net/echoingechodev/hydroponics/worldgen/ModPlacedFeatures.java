@@ -18,12 +18,16 @@ import static net.echoingechodev.hydroponics.Hydroponics.MODID;
 public class ModPlacedFeatures {
 
     public static final ResourceKey<PlacedFeature> OVERWORLD_SALTPETER_ORE_PLACED_KEY = registerKey("overworld_saltpeter_ore_placed");
+    public static final ResourceKey<PlacedFeature> NETHER_SALTPETER_ORE_PLACED_KEY = registerKey("nether_saltpeter_ore_placed");
+
 
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
         var configuredFeature = context.lookup(Registries.CONFIGURED_FEATURE);
 
         register(context, OVERWORLD_SALTPETER_ORE_PLACED_KEY, configuredFeature.getOrThrow(ModConfiguredFeatures.OVERWORLD_SALTPETER_ORE_KEY),
                 commonOrePlacement(9, HeightRangePlacement.uniform(VerticalAnchor.absolute(32), VerticalAnchor.absolute(64))));
+        register(context, NETHER_SALTPETER_ORE_PLACED_KEY, configuredFeature.getOrThrow(ModConfiguredFeatures.NETHER_SALTPETER_ORE_KEY),
+                commonOrePlacement(6, HeightRangePlacement.uniform(VerticalAnchor.absolute(32), VerticalAnchor.absolute(128))));
     }
 
     public static ResourceKey<PlacedFeature> registerKey(String name) {

@@ -22,6 +22,8 @@ import static net.echoingechodev.hydroponics.Hydroponics.MODID;
 public class ModBiomeModifiers {
 
     public static final ResourceKey<BiomeModifier> ADD_OVERWORLD_SALTPETER_ORE = registerKey("add_overworld_saltpeter_ore");
+    public static final ResourceKey<BiomeModifier> ADD_NETHER_SALTPETER_ORE = registerKey("add_nether_saltpeter_ore");
+
 
     public static void bootstrap(BootstrapContext<BiomeModifier> context) {
         var placedFeatures = context.lookup(Registries.PLACED_FEATURE);
@@ -30,6 +32,11 @@ public class ModBiomeModifiers {
         context.register(ADD_OVERWORLD_SALTPETER_ORE, new BiomeModifiers.AddFeaturesBiomeModifier(
                 biomes.getOrThrow(BiomeTags.IS_OVERWORLD),
                 HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.OVERWORLD_SALTPETER_ORE_PLACED_KEY)),
+                GenerationStep.Decoration.UNDERGROUND_ORES
+        ));
+        context.register(ADD_NETHER_SALTPETER_ORE, new BiomeModifiers.AddFeaturesBiomeModifier(
+                biomes.getOrThrow(BiomeTags.IS_NETHER),
+                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.NETHER_SALTPETER_ORE_PLACED_KEY)),
                 GenerationStep.Decoration.UNDERGROUND_ORES
         ));
     }

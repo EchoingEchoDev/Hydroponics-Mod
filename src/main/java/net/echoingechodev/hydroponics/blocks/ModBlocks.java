@@ -25,6 +25,8 @@ public class ModBlocks {
 
     public static final DeferredBlock<Block> SALTPETER_ORE = registerBlockWithItem("saltpeter_ore",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_ORE)));
+    public static final DeferredBlock<Block> NETHER_SALTPETER_ORE = registerBlockWithItem("nether_saltpeter_ore",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.NETHER_QUARTZ_ORE)));
 
     public static final DeferredBlock<HydroponicTowerBlock> HYDROPONIC_TOWER_BLOCK = registerBlockWithItem("hydroponic_tower_block",
             () -> new HydroponicTowerBlock(BlockBehaviour.Properties.of().noOcclusion()));

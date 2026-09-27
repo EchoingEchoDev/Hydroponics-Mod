@@ -1,5 +1,6 @@
 package net.echoingechodev.hydroponics.blocks.blockentities;
 
+import net.echoingechodev.hydroponics.Config;
 import net.echoingechodev.hydroponics.blocks.ModBlocks;
 import net.echoingechodev.hydroponics.util.ModTags;
 import net.minecraft.core.BlockPos;
@@ -38,8 +39,9 @@ import static net.echoingechodev.hydroponics.blocks.blockentities.ModBlockEntiti
 
 public class HydroponicTowerEntity extends BlockEntity {
 
-    private static final int fill_capacity = 4000;
-    private static final int max_transfer = 1000;
+    private static final int fill_capacity = Config.HYDROPONIC_TOWER_FILLCAPACITY.getAsInt();
+    private static final int max_transfer = Config.HYDROPONIC_TOWER_TRANSFERRATE.getAsInt();
+    private static final int ticks_per_action = Config.HYDROPONIC_TOWER_TICKRATE.getAsInt();
 
     private FluidTank tank = new FluidTank(fill_capacity) {
         @Override
@@ -60,7 +62,6 @@ public class HydroponicTowerEntity extends BlockEntity {
     };
     private int connected_sides = 0;
     private boolean connected_below = false;
-    private static final int ticks_per_action = 4;
     private int tick_count = 0;
 
     public HydroponicTowerEntity(BlockEntityType<?> type, BlockPos pos, BlockState blockState) {

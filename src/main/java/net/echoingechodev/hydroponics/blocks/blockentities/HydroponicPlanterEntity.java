@@ -1,5 +1,6 @@
 package net.echoingechodev.hydroponics.blocks.blockentities;
 
+import net.echoingechodev.hydroponics.Config;
 import net.echoingechodev.hydroponics.fluids.ModFluids;
 import net.echoingechodev.hydroponics.util.ModTags;
 import net.minecraft.core.BlockPos;
@@ -25,12 +26,11 @@ import org.jetbrains.annotations.Nullable;
 
 public class HydroponicPlanterEntity extends BlockEntity {
 
-    private static final int fill_capacity = 4000;
-    //private static final int base_comsume_amount = 10;
-    private static final int water_consume_amount = 20;
-    private static final int nutrient_fluid_consume_amount = 2;
-    private static final int other_fluid_consume_amount = 2;
-    private static final int ticks_per_action = 3;
+    private static final int fill_capacity = Config.HYDROPONIC_PLANTER_FILLCAPACITY.getAsInt();
+    private static final int water_consume_amount = Config.HYDROPONIC_PLANTER_WATER_CONSUME.getAsInt();
+    private static final int nutrient_fluid_consume_amount = Config.HYDROPONIC_PLANTER_NUTRIENT_FLUID_CONSUME.getAsInt();
+    private static final int other_fluid_consume_amount = Config.HYDROPONIC_PLANTER_OTHER_FLUID_CONSUME.getAsInt();
+    private static final int ticks_per_action = Config.HYDROPONIC_PLANTER_TICKRATE.getAsInt();
     private int tick_count = 0;
 
     private FluidTank tank = new FluidTank(fill_capacity) {
