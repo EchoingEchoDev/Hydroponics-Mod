@@ -14,7 +14,10 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.CropBlock;
+import net.minecraft.world.level.block.SugarCaneBlock;
+import net.minecraft.world.level.block.SweetBerryBushBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -111,12 +114,28 @@ public class HydroponicPlanterEntity extends BlockEntity {
             } else {
                 return false;
             }
+        } else if (crop.getBlock() instanceof SugarCaneBlock target) {
+            if (RandomSource.create().nextInt(8) == 0) {       // Random chance, cause it doesn't have a reasonable way to determine if it can grow
+                crop.randomTick((ServerLevel) level, pos, RandomSource.create());
+                return true;
+            } else {
+                return false;
+            }
+        } else if (crop.getBlock() instanceof SweetBerryBushBlock target) {
+            if (target.isValidBonemealTarget(level, pos, crop)) {
+                crop.randomTick((ServerLevel) level, pos, RandomSource.create());
+                return true;
+            } else {
+                return false;
+            }
         }
         return false;
     }
 
     public static BlockState getCropAt(Level level, BlockPos pos) {
-        if (level.getBlockState(pos).getBlock() instanceof CropBlock) {
+        if (level.getBlockState(pos).getBlock() instanceof CropBlock ||
+                level.getBlockState(pos).getBlock() instanceof SugarCaneBlock ||
+                level.getBlockState(pos).getBlock() instanceof SweetBerryBushBlock) {
             return level.getBlockState(pos);
         } else {
             return null;
