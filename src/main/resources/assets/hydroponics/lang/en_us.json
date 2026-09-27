@@ -19,5 +19,12 @@
   "hydroponics.configuration.hydroponic_planter_tickrate": "Hydroponic Planter Tick-Rate",
   "hydroponics.configuration.hydroponic_planter_water_consume": "Hydroponic Planter Water Consumption",
   "hydroponics.configuration.hydroponic_planter_nutrient_fluid_consume": "Hydroponic Planter Nutrient Fluid Consumption",
-  "hydroponics.configuration.hydroponic_planter_other_fluid_consume": "Hydroponic Planter Other Fluid Consumption"
+  "hydroponics.configuration.hydroponic_planter_other_fluid_consume": "Hydroponic Planter Other Fluid Consumption",
+
+  "hydroponics.ponder.setup_hydroponic_tower.header": "Setting up a Hydroponic Tower",
+  "hydroponics.ponder.setup_hydroponic_tower.text_1": "Begin by placing some Hydroponic Tower blocks above eachother",
+  "hydroponics.ponder.setup_hydroponic_tower.text_2": "Any compatible fluid added to the top block will travel down to the lowest block",
+  "hydroponics.ponder.setup_hydroponic_tower.text_3": "This is a Hydroponic Planter. As liquid flows through the Tower it will distribute some to these Planters",
+  "hydroponics.ponder.setup_hydroponic_tower.text_4": "Planters will then use fluid to grow crops",
+  "hydroponics.ponder.setup_hydroponic_tower.text_5": "Compatible fluids can be pumped in through the top of the Tower"
 }

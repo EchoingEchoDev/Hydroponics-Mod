@@ -3,6 +3,7 @@ package net.echoingechodev.hydroponics;
 import net.echoingechodev.hydroponics.blocks.blockentities.HydroponicPlanterEntity;
 import net.echoingechodev.hydroponics.blocks.blockentities.HydroponicTowerEntity;
 import net.echoingechodev.hydroponics.datagen.DataGenerators;
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.EventBusSubscriber;
 import org.slf4j.Logger;
 
@@ -41,6 +42,10 @@ public class Hydroponics {
     // Directly reference a slf4j logger
     public static final Logger LOGGER = LogUtils.getLogger();
 
+    public static boolean isPonderLoaded = false;
+    public static boolean isCreateLoaded = false;
+    public static boolean isMekanismLoaded = false;
+
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
     // Creates a creative tab with the id "hydroponics:example_tab" for the example item, that is placed after the combat tab
@@ -53,6 +58,7 @@ public class Hydroponics {
                 output.accept(COMPOST.get());
                 output.accept(SALTPETER.get());
                 output.accept(SALTPETER_ORE.get());
+                output.accept(NETHER_SALTPETER_ORE.get());
                 output.accept(NUTRIENT_WATER_BUCKET.get());
                 output.accept(HYDROPONIC_TOWER_BLOCK.get());
                 output.accept(HYDROPONIC_PLANTER_BLOCK.get());
@@ -85,6 +91,10 @@ public class Hydroponics {
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+
+        isPonderLoaded = ModList.get().isLoaded("ponder");
+        isCreateLoaded = ModList.get().isLoaded("create");
+        isMekanismLoaded = ModList.get().isLoaded("mekanism");
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
