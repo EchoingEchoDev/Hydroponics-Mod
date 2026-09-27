@@ -5,6 +5,8 @@ import net.echoingechodev.hydroponics.blocks.blockentities.HydroponicTowerEntity
 import net.echoingechodev.hydroponics.blocks.blockentities.ModBlockEntitieTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
@@ -13,10 +15,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.EntityBlock;
-import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -77,24 +76,36 @@ public class HydroponicTowerBlock extends BaseEntityBlock implements EntityBlock
         return checkedType == type ? (BlockEntityTicker<A>) ticker : null;
     }
 
+
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         if ((level.getBlockEntity(pos) instanceof HydroponicTowerEntity towerEntity)) {
-            if (isFilledFluidContainer(stack)) {
+            if (stack.isEmpty()) {
+                return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+            }
+            if (isFilledFluidContainer(stack)) {    // FILLING BLOCK
                 FluidStack fluidStack = FluidUtil.getFluidContained(stack).orElse(null);
                 if (towerEntity.getTank().isEmpty() || towerEntity.fluidFitsInTank(fluidStack)) {
                     var result = FluidUtil.tryEmptyContainer(stack, towerEntity.getTank(), fluidStack.getAmount(), player, true);
                     if (result.isSuccess()) {
-                        player.setItemInHand(hand, result.getResult());
+                        if (!player.isCreative()) {
+                            stack.shrink(1);
+                            player.addItem(result.getResult());
+                        }
+                        level.playSound(player, pos, SoundEvents.BUCKET_EMPTY, SoundSource.BLOCKS);
                         return ItemInteractionResult.SUCCESS;
                     } else {
                         return ItemInteractionResult.FAIL;
                     }
                 }
-            } else if (isEmptyFluidContainer(stack)) {
+            } else if (isEmptyFluidContainer(stack)) {  // DRAINING BLOCK
                 var result = FluidUtil.tryFillContainer(stack, towerEntity.getTank(), 1000, player, true);
                 if (result.isSuccess()) {
-                    player.setItemInHand(hand, result.getResult());
+                    if (!player.isCreative()) {
+                        stack.shrink(1);
+                        player.addItem(result.getResult());
+                    }
+                    level.playSound(player, pos, SoundEvents.BUCKET_FILL, SoundSource.BLOCKS);
                     return ItemInteractionResult.SUCCESS;
                 } else {
                     return ItemInteractionResult.FAIL;
@@ -102,7 +113,7 @@ public class HydroponicTowerBlock extends BaseEntityBlock implements EntityBlock
             }
             return ItemInteractionResult.FAIL;
         }
-        return ItemInteractionResult.FAIL;
+        return ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
     }
 
     private static boolean isFilledFluidContainer(ItemStack itemStack) {

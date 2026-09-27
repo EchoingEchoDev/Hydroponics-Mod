@@ -6,7 +6,11 @@ import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
+import net.neoforged.neoforge.common.SoundAction;
+import net.neoforged.neoforge.common.SoundActions;
 import net.neoforged.neoforge.fluids.FluidType;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
@@ -45,6 +49,20 @@ public class BaseModFluidType extends FluidType {
 
     public Vector3f getFogColor() {
         return fogColor;
+    }
+
+    @Override
+    public @Nullable SoundEvent getSound(SoundAction action) {
+        if (action.equals(SoundActions.BUCKET_FILL)) {
+            return SoundEvents.BUCKET_FILL;
+        }
+        if (action.equals(SoundActions.BUCKET_EMPTY)) {
+            return SoundEvents.BUCKET_EMPTY;
+        }
+        if (action.equals(SoundActions.CAULDRON_DRIP)) {
+            return SoundEvents.POINTED_DRIPSTONE_DRIP_WATER_INTO_CAULDRON;
+        }
+        return SoundEvents.EMPTY;
     }
 
     @Override
