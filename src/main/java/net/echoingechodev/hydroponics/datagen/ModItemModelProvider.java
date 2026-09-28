@@ -19,5 +19,6 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModItems.COMPOST.get());
         basicItem(ModItems.SALTPETER.get());
         basicItem(ModItems.NUTRIENT_WATER_BUCKET.get());
+        basicItem(ModItems.NUTRIENT_MIX.get());
     }
 }

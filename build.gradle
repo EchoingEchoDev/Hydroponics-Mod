@@ -28,13 +28,39 @@ sourceSets.main.resources {
 
 repositories {
     // Add here additional repositories if required by some of the dependencies below.
-    maven {url "https://cursemaven.com" }
+    maven {url = "https://cursemaven.com" }
 
     maven {url = "https://maven.createmod.net" }
 
     maven {url = "https://api.modrinth.com/maven" }
 
     maven { url = "https://maven.ithundxr.dev/snapshots" } // Registrate
+
+    maven {
+        name = "BlameJared"
+        url = "https://maven.blamejared.com"
+    }
+    maven {
+        name = 'GeckoLib'
+        url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+        content {
+            includeGroup("software.bernie.geckolib")
+        }
+    }
+
+    maven { url 'https://maven.wispforest.io' }
+
+    maven { url "https://maven.architectury.dev/" }
+    maven { url "https://maven.neoforged.net/releases" }
+
+    maven {
+        url "https://modmaven.dev/"
+        content {
+            includeGroup "dev.technici4n"
+        }
+    }
+
+    maven { url = "https://maven.teamresourceful.com/repository/maven-public/" }
 }
 
 base {
@@ -152,6 +178,17 @@ dependencies {
     compileOnly("dev.engine-room.flywheel:flywheel-neoforge-api-${minecraft_version}:${flywheel_version}")
     runtimeOnly("dev.engine-room.flywheel:flywheel-neoforge-${minecraft_version}:${flywheel_version}")
     implementation("com.tterrag.registrate:Registrate:${registrate_version}")
+
+    //compileOnly("maven.modrinth:b1ZV3DIJ:TbNOQ4qu") // Athena for Oritech
+    //runtimeOnly("maven.modrinth:b1ZV3DIJ:TbNOQ4qu")
+    /*compileOnly("software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}") // Geckolib for Oritech
+    runtimeOnly("software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}")
+    compileOnly("dev.architectury:architectury-neoforge:13.0.8") // Architectuary for Oritech
+    runtimeOnly("dev.architectury:architectury-neoforge:13.0.8")
+    compileOnly("io.wispforest:owo-lib:${project.owo_version}") // OWO-Lib for Oritech
+    runtimeOnly("io.wispforest:owo-lib:${project.owo_version}")*/
+    compileOnly("rearth.oritech:oritech-neoforge-${minecraft_version}:${oritech_version}")  // Oritech
+    runtimeOnly("rearth.oritech:oritech-neoforge-${minecraft_version}:${oritech_version}")
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html

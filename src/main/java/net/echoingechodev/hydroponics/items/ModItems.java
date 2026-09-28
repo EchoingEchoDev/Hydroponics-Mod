@@ -22,5 +22,7 @@ public class ModItems {
     public static final DeferredItem<Item> NUTRIENT_WATER_BUCKET = ITEMS.register("nutrient_water_bucket",
             () -> new BucketItem(NUTRIENT_WATER.get(), new Item.Properties().craftRemainder(BUCKET).stacksTo(1)));
 
+    public static final DeferredItem<Item> NUTRIENT_MIX = ITEMS.registerSimpleItem("nutrient_mix", new Item.Properties());
+
 
 }

@@ -9,16 +9,7 @@
       "item": "minecraft:bucket"
     },
     {
-      "item": "minecraft:bone_meal"
-    },
-    {
-      "item": "minecraft:bone_meal"
-    },
-    {
-      "item": "hydroponics:compost"
-    },
-    {
-      "item": "hydroponics:saltpeter"
+      "item": "hydroponics:nutrient_mix"
     }
   ],
   "result": {

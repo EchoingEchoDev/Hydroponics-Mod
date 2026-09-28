@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_nutrient_mix": {
+    "has_saltpeter": {
       "conditions": {
         "items": [
           {
-            "items": "hydroponics:nutrient_mix"
+            "items": "hydroponics:saltpeter"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "hydroponics:nutrient_water_bucket_from_base"
+        "recipe": "hydroponics:nutrient_mix"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_nutrient_mix"
+      "has_saltpeter"
     ]
   ],
   "rewards": {
     "recipes": [
-      "hydroponics:nutrient_water_bucket_from_base"
+      "hydroponics:nutrient_mix"
     ]
   }
 }

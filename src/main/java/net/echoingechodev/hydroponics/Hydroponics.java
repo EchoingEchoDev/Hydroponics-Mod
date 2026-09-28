@@ -45,7 +45,7 @@ public class Hydroponics {
     public static boolean isPonderLoaded = false;
     public static boolean isJadeLoaded = false;
     public static boolean isCreateLoaded = false;
-    public static boolean isMekanismLoaded = false;
+    public static boolean isOritechLoaded = false;
 
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
@@ -58,6 +58,7 @@ public class Hydroponics {
                 //output.accept(EXAMPLE_ITEM.get());// Add the example item to the tab. For your own tabs, this method is preferred over the event
                 output.accept(COMPOST.get());
                 output.accept(SALTPETER.get());
+                output.accept(NUTRIENT_MIX.get());
                 output.accept(SALTPETER_ORE.get());
                 output.accept(NETHER_SALTPETER_ORE.get());
                 output.accept(NUTRIENT_WATER_BUCKET.get());
@@ -96,7 +97,7 @@ public class Hydroponics {
         isPonderLoaded = ModList.get().isLoaded("ponder");
         isJadeLoaded = ModList.get().isLoaded("jade");
         isCreateLoaded = ModList.get().isLoaded("create");
-        isMekanismLoaded = ModList.get().isLoaded("mekanism");
+        isOritechLoaded = ModList.get().isLoaded("oritech");
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {

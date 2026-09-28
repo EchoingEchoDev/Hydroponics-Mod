@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "hydroponics:compost"
+    },
+    {
+      "item": "hydroponics:saltpeter"
+    },
+    {
+      "item": "minecraft:bone_meal"
+    },
+    {
+      "item": "minecraft:bone_meal"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "hydroponics:nutrient_mix"
+  }
+}

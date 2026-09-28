@@ -95,10 +95,10 @@ A mod aiming to introduce a hydroponic planting system to Minecraft.
     side="BOTH"
 
 [[dependencies."${mod_id}"]]
-    modId="mekanism"
+    modId="oritech"
     type="optional"
     # This version range declares a minimum of the current minecraft version up to but not including the next major version
-    versionRange="[10.7.19,)"
+    versionRange="[1.2.9,)"
     ordering="NONE"
     side="BOTH"
 

@@ -10,6 +10,7 @@
   "item.hydroponics.compost": "Compost",
   "item.hydroponics.saltpeter": "Saltpeter",
   "item.hydroponics.nutrient_water_bucket": "Nutrient Water Bucket",
+  "item.hydroponics.nutrient_mix": "Plant Nutrient Mix",
 
   "hydroponics.configuration.title": "Hydroponics Configs",
   "hydroponics.configuration.section.hydroponics.common.toml": "Hydroponics Configs",

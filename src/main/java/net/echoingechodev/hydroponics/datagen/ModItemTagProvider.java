@@ -31,6 +31,9 @@ public class ModItemTagProvider extends ItemTagsProvider {
         tag(Tags.Items.DUSTS)
                 .add(ModItems.SALTPETER.get());
 
-
+        tag(Tags.Items.FERTILIZERS)
+                .add(ModItems.COMPOST.get())
+                .add(ModItems.SALTPETER.get())
+                .add(ModItems.NUTRIENT_MIX.get());
     }
 }

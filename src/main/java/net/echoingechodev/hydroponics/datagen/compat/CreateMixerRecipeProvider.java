@@ -13,11 +13,16 @@ import java.util.concurrent.CompletableFuture;
 public class CreateMixerRecipeProvider extends MixingRecipeGen {
 
     GeneratedRecipe
-    NUTRIENT_FLUID = create("nutrient_fluid_from_mixing", b ->
+    NUTRIENT_FLUID_RAW = create("nutrient_fluid_from_mixing_raw", b ->
             b.require(Fluids.WATER, 250)
                     .require(ModItems.SALTPETER)
                     .require(ModItems.COMPOST)
                     .require(Items.BONE_MEAL)
+            .output(ModFluids.NUTRIENT_WATER.get(), 250)
+            ),
+    NUTRIENT_FLUID_MIX = create("nutrient_fluid_from_mixing", b ->
+            b.require(Fluids.WATER, 250)
+            .require(ModItems.NUTRIENT_MIX)
             .output(ModFluids.NUTRIENT_WATER.get(), 250)
             )
             ;
