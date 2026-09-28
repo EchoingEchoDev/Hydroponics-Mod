@@ -1,5 +1,6 @@
 package net.echoingechodev.hydroponics.datagen;
 
+import com.simibubi.create.AllTags;
 import net.echoingechodev.hydroponics.Hydroponics;
 import net.echoingechodev.hydroponics.blocks.ModBlocks;
 import net.echoingechodev.hydroponics.util.ModTags;
@@ -50,5 +51,18 @@ public class ModBlockTagProvider extends BlockTagsProvider {
 
         tag(Tags.Blocks.ORES_IN_GROUND_NETHERRACK)
                 .add(ModBlocks.NETHER_SALTPETER_ORE.get());
+
+        // Create tags
+        tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
+                .add(ModBlocks.HYDROPONIC_TOWER_BLOCK.get())
+                .add(ModBlocks.HYDROPONIC_PLANTER_BLOCK.get());
+
+        tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag)
+                .add(ModBlocks.HYDROPONIC_TOWER_BLOCK.get())
+                .add(ModBlocks.HYDROPONIC_PLANTER_BLOCK.get());
+
+        tag(AllTags.AllBlockTags.NON_HARVESTABLE.tag)
+                .add(ModBlocks.HYDROPONIC_TOWER_BLOCK.get())
+                .add(ModBlocks.HYDROPONIC_PLANTER_BLOCK.get());
     }
 }

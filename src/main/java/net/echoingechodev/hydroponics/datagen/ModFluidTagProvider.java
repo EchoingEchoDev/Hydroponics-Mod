@@ -1,5 +1,6 @@
 package net.echoingechodev.hydroponics.datagen;
 
+import com.simibubi.create.AllTags;
 import net.echoingechodev.hydroponics.Hydroponics;
 import net.echoingechodev.hydroponics.fluids.ModFluids;
 import net.echoingechodev.hydroponics.util.ModTags;
@@ -21,6 +22,12 @@ public class ModFluidTagProvider extends FluidTagsProvider {
     protected void addTags(HolderLookup.Provider provider) {
         tag(ModTags.Fluids.HYDROPONIC_GROWTH_FLUID)
                 .add(Fluids.WATER)
+                .add(ModFluids.NUTRIENT_WATER.get());
+
+        tag(AllTags.AllFluidTags.BOTTOMLESS_ALLOW.tag)
+                .add(ModFluids.NUTRIENT_WATER.get());
+
+        tag(AllTags.AllFluidTags.FAN_PROCESSING_CATALYSTS_SPLASHING.tag)
                 .add(ModFluids.NUTRIENT_WATER.get());
     }
 }

@@ -1,0 +1,27 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "minecraft:bone_meal"
+    },
+    {
+      "item": "hydroponics:compost"
+    },
+    {
+      "item": "hydroponics:saltpeter"
+    },
+    {
+      "type": "fluid_stack",
+      "amount": 250,
+      "fluid": "minecraft:water"
+    }
+  ],
+  "results": [
+    {
+      "type": "fluid_stack",
+      "amount": 250,
+      "fluid": "hydroponics:nutrient_water"
+    }
+  ]
+
+}

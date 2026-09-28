@@ -59,7 +59,7 @@ A mod aiming to introduce a hydroponic planting system to Minecraft.
 #file="META-INF/accesstransformer.cfg"
 
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
-[[dependencies.${mod_id}]] #optional
+[[dependencies."${mod_id}"]] #optional
     # the modid of the dependency
     modId="neoforge" #mandatory
     # The type of the dependency. Can be one of "required", "optional", "incompatible" or "discouraged" (case insensitive).
@@ -78,35 +78,35 @@ A mod aiming to introduce a hydroponic planting system to Minecraft.
     side="BOTH"
 
 # Here's another dependency
-[[dependencies.jade]]
+[[dependencies."${mod_id}"]]
     modId="jade"
     type="optional"
     # This version range declares a minimum of the current minecraft version up to but not including the next major version
-    versionRange="${minecraft_version_range}"
+    versionRange="[15.10.6+neoforge,)"
     ordering="NONE"
     side="BOTH"
 
-[[dependencies.create]]
+[[dependencies."${mod_id}"]]
     modId="create"
     type="optional"
     # This version range declares a minimum of the current minecraft version up to but not including the next major version
-    versionRange="${minecraft_version_range}"
+    versionRange="[6.0.10,)"
     ordering="NONE"
     side="BOTH"
 
-[[dependencies.mekanism]]
+[[dependencies."${mod_id}"]]
     modId="mekanism"
     type="optional"
     # This version range declares a minimum of the current minecraft version up to but not including the next major version
-    versionRange="${minecraft_version_range}"
+    versionRange="[10.7.19,)"
     ordering="NONE"
     side="BOTH"
 
-[[dependencies.compost]]
+[[dependencies."${mod_id}"]]
     modId="compost"
     type="optional"
     # This version range declares a minimum of the current minecraft version up to but not including the next major version
-    versionRange="${minecraft_version_range}"
+    versionRange="[3.0.3,)"
     ordering="NONE"
     side="BOTH"
 

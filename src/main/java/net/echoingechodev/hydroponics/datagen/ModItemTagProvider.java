@@ -1,5 +1,6 @@
 package net.echoingechodev.hydroponics.datagen;
 
+import com.simibubi.create.AllTags;
 import net.echoingechodev.hydroponics.Hydroponics;
 import net.echoingechodev.hydroponics.blocks.ModBlocks;
 import net.echoingechodev.hydroponics.items.ModItems;
@@ -29,6 +30,7 @@ public class ModItemTagProvider extends ItemTagsProvider {
 
         tag(Tags.Items.DUSTS)
                 .add(ModItems.SALTPETER.get());
+
 
     }
 }

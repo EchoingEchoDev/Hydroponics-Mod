@@ -30,10 +30,10 @@ public class ModBlocks {
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.NETHER_QUARTZ_ORE)));
 
     public static final DeferredBlock<HydroponicTowerBlock> HYDROPONIC_TOWER_BLOCK = registerBlockWithItem("hydroponic_tower_block",
-            () -> new HydroponicTowerBlock(BlockBehaviour.Properties.of().noOcclusion()));
+            () -> new HydroponicTowerBlock(BlockBehaviour.Properties.of().noOcclusion().strength(3f, 3f).sound(SoundType.COPPER)));
 
     public static final DeferredBlock<HydroponicPlanterBlock> HYDROPONIC_PLANTER_BLOCK = registerBlockWithItem("hydroponic_planter_block",
-            () -> new HydroponicPlanterBlock(BlockBehaviour.Properties.of().noOcclusion()));
+            () -> new HydroponicPlanterBlock(BlockBehaviour.Properties.of().noOcclusion().strength(3f, 3f).sound(SoundType.COPPER)));
 
     public static final Supplier<LiquidBlock> NUTRIENT_WATER_BLOCK = BLOCKS.register("nutrient_water_block", () ->
             new LiquidBlock(NUTRIENT_WATER.get(), BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_RED)

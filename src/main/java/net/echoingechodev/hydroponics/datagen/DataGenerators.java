@@ -1,6 +1,7 @@
 package net.echoingechodev.hydroponics.datagen;
 
 import net.echoingechodev.hydroponics.Hydroponics;
+import net.echoingechodev.hydroponics.datagen.compat.CreateMixerRecipeProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -18,7 +19,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-@EventBusSubscriber(modid = Hydroponics.MODID)
+import static net.echoingechodev.hydroponics.Hydroponics.MODID;
+
+@EventBusSubscriber(modid = MODID)
 public class DataGenerators {
 
     @SubscribeEvent
@@ -31,6 +34,8 @@ public class DataGenerators {
         generator.addProvider(event.includeServer(), new LootTableProvider(packOutput, Collections.emptySet(),
                List.of(new LootTableProvider.SubProviderEntry(ModBlockLootTableProvider::new, LootContextParamSets.BLOCK)), lookupProvider));
         generator.addProvider(event.includeServer(), new ModRecipeProvider(packOutput, lookupProvider));
+
+        generator.addProvider(event.includeServer(), new CreateMixerRecipeProvider(packOutput, lookupProvider, MODID));
 
         BlockTagsProvider blockTagsProvider = new ModBlockTagProvider(packOutput, lookupProvider, existingFileHelper);
         generator.addProvider(event.includeServer(), blockTagsProvider);
