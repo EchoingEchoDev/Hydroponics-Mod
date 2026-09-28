@@ -1,15 +1,13 @@
 package net.echoingechodev.hydroponics.blocks.blockentities;
 
-import net.echoingechodev.hydroponics.blocks.ModBlocks;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-import java.util.function.Supplier;
-
 import static net.echoingechodev.hydroponics.Hydroponics.MODID;
-import static net.echoingechodev.hydroponics.blocks.ModBlocks.*;
+import static net.echoingechodev.hydroponics.blocks.ModBlocks.HYDROPONIC_PLANTER_BLOCK;
+import static net.echoingechodev.hydroponics.blocks.ModBlocks.HYDROPONIC_TOWER_BLOCK;
 
 public class ModBlockEntitieTypes {
 

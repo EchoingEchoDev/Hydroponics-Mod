@@ -5,8 +5,10 @@ import net.echoingechodev.hydroponics.blocks.HydroponicPlanterBlock;
 import net.echoingechodev.hydroponics.blocks.HydroponicTowerBlock;
 import net.echoingechodev.hydroponics.blocks.blockentities.HydroponicPlanterEntity;
 import net.echoingechodev.hydroponics.blocks.blockentities.HydroponicTowerEntity;
-import net.minecraft.world.level.block.AbstractFurnaceBlock;
-import snownee.jade.api.*;
+import snownee.jade.api.IWailaClientRegistration;
+import snownee.jade.api.IWailaCommonRegistration;
+import snownee.jade.api.IWailaPlugin;
+import snownee.jade.api.WailaPlugin;
 
 @WailaPlugin
 public class HydroponicsJadePlugin implements IWailaPlugin {

@@ -14,8 +14,6 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import net.neoforged.neoforge.common.Tags;
 
-import java.util.List;
-
 import static net.echoingechodev.hydroponics.Hydroponics.MODID;
 
 public class ModConfiguredFeatures {

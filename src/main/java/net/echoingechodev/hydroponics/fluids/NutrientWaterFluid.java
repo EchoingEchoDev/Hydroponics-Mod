@@ -1,7 +1,5 @@
 package net.echoingechodev.hydroponics.fluids;
 
-import net.minecraft.world.level.material.FlowingFluid;
-import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.WaterFluid;
 

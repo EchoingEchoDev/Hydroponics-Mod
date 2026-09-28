@@ -2,13 +2,10 @@ package net.echoingechodev.hydroponics.ponders;
 
 import net.createmod.catnip.math.Pointing;
 import net.createmod.ponder.api.PonderPalette;
-import net.createmod.ponder.api.element.ElementLink;
 import net.createmod.ponder.api.scene.SceneBuilder;
 import net.createmod.ponder.api.scene.SceneBuildingUtil;
-import net.echoingechodev.hydroponics.blocks.ModBlocks;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.Vec3;
 
 import static net.echoingechodev.hydroponics.ponders.ModPonders.SETUP_HYDROPONIC_TOWER;
